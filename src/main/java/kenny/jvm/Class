@@ -1,0 +1,34 @@
+*************************************************************************
+    class Class<T> implements java.io.Serializable,
+                              java.lang.reflect.GenericDeclaration,
+                              java.lang.reflect.Type,
+                              java.lang.reflect.AnnotatedElement {
+***********************************
+    /*
+     * Constructor. Only the Java Virtual Machine creates Class
+     * objects.
+     */
+    private Class() {}
+***********************************
+    public static Class<?> forName(String className)
+                throws ClassNotFoundException {
+        Class<?> caller = Reflection.getCallerClass();
+        return forName0(className, true, ClassLoader.getClassLoader(caller), caller);
+    }
+***********************************
+    public static Class<?> forName(String name, boolean initialize,
+                                   ClassLoader loader)
+
+***********************************
+    /** Called after security check for system loader access checks have been made. */
+    private static native Class<?> forName0(String name, boolean initialize,
+                                            ClassLoader loader,
+                                            Class<?> caller)
+        throws ClassNotFoundException;
+
+***********************************
+    public T newInstance()
+        throws InstantiationException, IllegalAccessException
+
+// Class这个类有点特殊，是个泛型类。
+// Class 没有公共构造方法。Class 对象是在加载类时由 Java 虚拟机以及通过调用类加载器中的 defineClass 方法自动构造的。

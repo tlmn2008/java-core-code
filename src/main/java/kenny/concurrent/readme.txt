@@ -1,0 +1,60 @@
+
+volatile的两种用法：
+1.保证被修饰的变量在一个线程中被修改后，另外一个使用该变量的线程会被通知到，而去堆中重新读取。
+2.函数中该变量的赋值前和赋值后的代码要保证顺序。
+
+在Java对象的函数声明中加入synchronized的关键字，则函数块进入之前和之后会分别调用lock()和unlock()。
+
+从语法上讲，Synchronized总共有三种用法：
+　　（1）修饰静态方法
+　　（2）修饰普通方法
+　　（3）修饰代码块
+
+
+锁的状态总共有四种：无锁状态、偏向锁、轻量级锁和重量级锁。
+Java并发编程：Synchronized底层优化（轻量级锁、偏向锁（(Biased Locking））。
+Synchronized是通过对象内部的一个叫做监视器锁（monitor）来实现的。但是监视器锁本质又是依赖于底层的操作系统的Mutex Lock来实现的。
+而操作系统实现线程之间的切换这就需要从用户态转换到核心态，这个成本非常高，状态之间的转换需要相对比较长的时间，这就是为什么Synchronized效率低的原因。
+因此，这种依赖于操作系统Mutex Lock所实现的锁我们称之为“重量级锁”。JDK中对Synchronized做的种种优化，其核心都是为了减少这种重量级锁的使用。
+JDK1.6以后，为了减少获得锁和释放锁所带来的性能消耗，提高性能，引入了“轻量级锁”和“偏向锁”。
+在JDK6中，偏向锁是默认启用的。它提高了单线程访问同步资源的性能。 但试想一下，如果你的同步资源或代码一直都是多线程访问的，那么消除偏向锁这一步骤对你来说就是多余的。
+事实上，消除偏向锁的开销还是蛮大的。
+所以在你非常熟悉自己的代码前提下，大可禁用偏向锁 -XX:-UseBiasedLocking
+
+
+自旋锁
+使用自旋锁后，线程被挂起的几率相对减少，线程执行的连贯性相对加强。因此，对于那些锁竞争不是很激烈，锁占用时间很短的并发线程，具有一定的积极意义。
+但是，对于锁竞争激烈，单线程锁占用很长时间的并发程序，自旋锁在自旋等待后，如果依然无法获得对应的锁，反而浪费了系统的资源。
+
+在JDK1.6中，Java虚拟机提供-XX:+UseSpinning参数来开启自旋锁，使用-XX:PreBlockSpin参数来设置自旋锁等待的次数，默认是10次。
+在JDK1.7开始，自旋锁的参数被取消，虚拟机不再支持由用户配置自旋锁，自旋锁总是会执行，自旋锁次数也由虚拟机自动调整，也就是开始使用自适应自旋锁。
+
+同步静态方法用xxx.class对象的锁？？？
+
+
+
+Java线程的状态：
+running调用synchronized函数的时候进入blocked状态，调用结束回到running状态。
+调用wait()的时候进入waiting状态，收到notify()时回到running状态。
+调用sleep()的时候进入timer waiting状态。时间到了回到running状态。
+
+Java.util.Concurrent.atomic包含了12个原子变量类， 可以看成是volatile变量的泛化。
+
+
+two basic synchronization mechanisms:
+
+1.The synchronized keyword
+2.The Lock interface and its implementation classes.
+
+ReentrantLock
+ReentrantReadWriteLock.ReadLock
+ReentrantReadWriteLock.WriteLock
+
+
+JUC包中的锁包括：Lock接口，ReadWriteLock接口，LockSupport阻塞原语，Condition条件，AbstractOwnableSynchronizer/AbstractQueuedSynchronizer/AbstractQueuedLongSynchronizer三个抽象类，
+ReentrantLock独占锁，
+ReentrantReadWriteLock读写锁。
+
+
+
+
