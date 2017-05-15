@@ -1,4 +1,4 @@
-package kenny.lang.zzzother;
+package kenny.lang.zzzgui;
 
 import java.awt.*;
 import javax.swing.*;
