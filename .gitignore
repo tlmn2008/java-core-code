@@ -1,1 +1,7 @@
 *.class
+*.jar
+*.ear
+*.rar
+target
+*.iml
+.idea
