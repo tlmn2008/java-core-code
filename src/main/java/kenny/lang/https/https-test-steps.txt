@@ -1,0 +1,15 @@
+HTTPS测试之生存证书（假定服务器的名字是HttpsServer）：
+
+第一步，生成keystone:
+keytool -genkey -v -alias HttpsServer -dname "CN=Hearty,OU=HE,O=CUI,L=HAIDIAN,ST=BEIJING,C=CN"
+-keyalg RSA -keysize 2048 -keypass embms1234 -keystore HttpsServer.keystore -storepass embms1234 -validity 10000
+
+第二步，生成certification:
+keytool -exportcert -alias HttpsServer -file HttpsServer.crt -keystore HttpsServer.keystore -storepass embms1234
+
+第三步，生成truststore并导入证书:
+keytool -import -alias HttpsServer -file HttpsServer.crt -keystore HttpsServer.truststore
+
+
+模拟客户端给服务器发请求：
+curl -i -k --cert HttpsServer.crt --key HttpsServer.truststore https://172.17.0.1:8443/xxx xxx
