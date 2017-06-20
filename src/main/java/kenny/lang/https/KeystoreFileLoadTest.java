@@ -21,7 +21,7 @@ public class KeystoreFileLoadTest {
         // test result: passwordEncode = "32f817e700033d974686a773aa4001eb"
 
         //下面的这个文件在resources文件夹中，密码是embms1234
-        KeyStore keyStore = loadKeyStore("src/main/resources/up_session.truststore","32f817e700033d974686a773aa4001eb");
+        KeyStore keyStore = loadKeyStore("src/main/java/kenny/lang/https/up_session.truststore","32f817e700033d974686a773aa4001eb");
     }
 
     private static KeyStore loadKeyStore(String path, String passwd) {

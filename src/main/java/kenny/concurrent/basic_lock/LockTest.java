@@ -1,4 +1,4 @@
-package kenny.concurrent;
+package kenny.concurrent.basic_lock;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
@@ -31,8 +31,6 @@ public class LockTest {
 //Thread-3 consume(150) <-- left= 30, dec= 10, size=  0
 //Thread-1 produce(120) --> left=  0, inc= 80, size= 80
 //Thread-3 consume(150) <-- left=  0, dec= 30, size= 50
-
-
 
 
 // 仓库

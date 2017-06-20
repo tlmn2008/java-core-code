@@ -13,7 +13,7 @@ Java中线程的创建有两种方式
 Callable位于java.util.concurrent包下，它是一个接口，只声明了一个方法，叫做call()；
 Future类位于java.util.concurrent包下，它是一个接口，Future接口中声明了5个方法。
 
-
+多线程程序，如果一个线程调用了System.exit()，则会终止所有的线程。
 
 
 

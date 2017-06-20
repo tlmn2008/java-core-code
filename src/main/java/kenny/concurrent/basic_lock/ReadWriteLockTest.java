@@ -1,4 +1,4 @@
-package kenny.concurrent;
+package kenny.concurrent.basic_lock;
 
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;

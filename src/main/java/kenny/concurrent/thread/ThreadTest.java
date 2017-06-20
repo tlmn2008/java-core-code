@@ -52,7 +52,8 @@ public class ThreadTest {
 		thread1.start();
 		thread2.start();
 		thread3.start();
-		
+
+		System.exit(0);
 		//*******************************************************
 		/*
 		MyThread thread4 = new MyThread();
