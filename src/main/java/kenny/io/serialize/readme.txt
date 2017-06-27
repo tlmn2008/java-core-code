@@ -1,0 +1,2 @@
+实现了Serializable接口的class需要声明一个long的serialVersionUID,用来标示当前class的版本号。
+标签接口：如Serialize 一个实现了标签接口的类，可以使用if(xxx instanceof Serialize)来 识别这个类是否属于某个类，所以比较实用。

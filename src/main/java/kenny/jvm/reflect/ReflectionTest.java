@@ -63,7 +63,7 @@ public class ReflectionTest {
 
 
         Class peopleClass = People.class;
-        Class people = Class.forName("kenny.jvm.reflect.People");
+        Class people = Class.forName("People");
         //获取指定的包名
         String package01 = peopleClass.getPackage().getName();
         String package02 = people.getPackage().getName();

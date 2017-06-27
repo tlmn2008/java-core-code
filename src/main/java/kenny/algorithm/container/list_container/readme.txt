@@ -1,0 +1,1 @@
+ArrayList 尽量使用 ArrayList(int initialCapacity) 初始化。

@@ -49,7 +49,7 @@ public class SimpleDebugger {
         vm = socketAttachingConnector.attach(defaultArguments);
 
         // 取得要关注的类和方法
-        List<ReferenceType> referenceTypes = vm.classesByName("kenny.jvm.jvmti.test.PrintJob");
+        List<ReferenceType> referenceTypes = vm.classesByName("PrintJob");
         if (referenceTypes == null || referenceTypes.size() == 0) {
             System.out.println("No class found");
             return;
