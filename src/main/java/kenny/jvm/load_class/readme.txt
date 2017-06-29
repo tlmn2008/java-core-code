@@ -1,6 +1,6 @@
 1.
 class xxx{
-staic{
+static{
 } //编译器会将里面的代码放入<clinit>中
 static int a;
 static void funca(){};

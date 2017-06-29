@@ -1,0 +1,20 @@
+********************************************************************************************
+********************************************************************************************
+1. ScheduledThreadPool()
+定长线程池：
+
+支持定时及周期性任务执行。
+创建方法：
+ExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(int corePoolSize);
+源码展示：
+public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
+    return new ScheduledThreadPoolExecutor(corePoolSize);
+}
+//ScheduledThreadPoolExecutor():
+public ScheduledThreadPoolExecutor(int corePoolSize) {
+    super(corePoolSize, Integer.MAX_VALUE,
+          DEFAULT_KEEPALIVE_MILLIS, MILLISECONDS,
+          new DelayedWorkQueue());
+}
+********************************************************************************************
+********************************************************************************************

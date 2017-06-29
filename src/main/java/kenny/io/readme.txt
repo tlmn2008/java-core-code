@@ -1,26 +1,5 @@
 计算机的IO接口： 键盘鼠标和显示器:标准IO（System.in, System.out） 硬盘：file 网络：socket。
 
-java.io和java.nio分别对应stream和channel的概念。
-
-普通壶---立等； //同步阻塞 //普通IO，效率低
-普通壶---不立等；//同步非阻塞 //实用（netty）
-响水壶---立等； //异步阻塞 //无用
-响水壶---不立等。 //异步非阻塞 //最有用，效率高
-
-同步和异步的区别：主动查询，被动通知；
-阻塞和非阻塞的区别：不立即返回和立即返回。
-
-
-IO模型有5种： 1.blocking； 2.non-blocking; 3.i/o multiplexing; 4.signal-driven i/o; 5.AIO.
-前面4种都是同步的。
-Java i/o属于第1种模型；
-Java nio种默认为blocking的为第1种模型，也可以配置成non-blocking的， 即第2种模型，若使用selector则实现了第3种模型，底层使用poll和epoll来实现。
-第4种nio中没有实现，而AIO是有实现的。？？？
-
-
-对于网络IO，一般都是非阻塞的，netty是提供了比Java nio更好的接口和其他功能。
-netty本质就是同步非阻塞IO，而最有用的AIO则没有实现。Linux的epoll貌似是实现了AIO。待查证。
-
 
 Java.nio中包含3中channel：pipe, file 和socket。 Java.nio中的selector对应于Linux中的select。
 三种IO都可以获得InputStream接口： System.in本身就是inputstream； FileInputStream(File file); Socket.getInputStream()。

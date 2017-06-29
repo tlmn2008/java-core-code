@@ -1,0 +1,60 @@
+
+常见3种线程池
+********************************************************************************************
+********************************************************************************************
+1. CachedThreadPool()
+可缓存线程池：
+
+线程数无限制
+有空闲线程则复用空闲线程，若无空闲线程则新建线程
+一定程序减少频繁创建/销毁线程，减少系统开销
+创建方法：
+ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
+源码展示：
+public static ExecutorService newCachedThreadPool() {
+    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
+                                  60L, TimeUnit.SECONDS,
+                                  new SynchronousQueue<Runnable>());
+}
+********************************************************************************************
+********************************************************************************************
+2. FixedThreadPool()
+定长线程池：
+
+可控制线程最大并发数（同时执行的线程数）
+超出的线程会在队列中等待
+创建方法（2种）：
+ExecutorService fixedThreadPool = Executors.newFixedThreadPool(int nThreads);
+ExecutorService fixedThreadPool = Executors.newFixedThreadPool(int nThreads, ThreadFactory threadFactory);
+源码展示：
+public static ExecutorService newFixedThreadPool(int nThreads) {
+    return new ThreadPoolExecutor(nThreads, nThreads,
+                                  0L, TimeUnit.MILLISECONDS,
+                                  new LinkedBlockingQueue<Runnable>());
+}
+********************************************************************************************
+********************************************************************************************
+3. SingleThreadExecutor()
+单线程化的线程池：
+
+有且仅有一个工作线程执行任务
+所有任务按照指定顺序执行，即遵循队列的入队出队规则
+创建方法：
+ExecutorService singleThreadPool = Executors.newSingleThreadPool();
+源码展示：
+public static ExecutorService newSingleThreadExecutor() {
+    return new FinalizableDelegatedExecutorService
+        (new ThreadPoolExecutor(1, 1,
+                                0L, TimeUnit.MILLISECONDS,
+                                new LinkedBlockingQueue<Runnable>()));
+}
+
+
+PS:
+通过ThreadPoolExecutor.execute(Runnable command)方法即可向线程池内添加一个任务.
+
+ThreadPoolExecutor的策略：
+线程数量未达到corePoolSize，则新建一个线程(核心线程)执行任务；
+线程数量达到了corePools，则将任务移入队列等待；
+队列已满，新建线程(非核心线程)执行任务；
+队列已满，总线程数又达到了maximumPoolSize，就会由RejectedExecutionHandler抛出异常。

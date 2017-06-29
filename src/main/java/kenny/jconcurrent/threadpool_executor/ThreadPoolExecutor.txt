@@ -1,33 +1,7 @@
-【强制】线程资源必须通过线程池提供，不允许在应用中自行显式创建线程。
-说明：使用线程池的好处是减少在创建和销毁线程上所花的时间以及系统资源的开销，解决资
-源不足的问题。如果不使用线程池，有可能造成系统创建大量同类线程而导致消耗完内存或者
-“过度切换”的问题。
-
-
-为什么用线程池
-
-1. 创建/销毁线程伴随着系统开销，过于频繁的创建/销毁线程，会很大程度上影响处理效率
->记创建线程消耗时间T1，执行任务消耗时间T2，销毁线程消耗时间T3
->如果T1+T3>T2，那么是不是说开启一个线程来执行这个任务太不划算了！
->正好，线程池缓存线程，可用已有的闲置线程来执行新任务，避免了T1+T3带来的系统开销
-
-2. 线程并发数量过多，抢占系统资源从而导致阻塞
->我们知道线程能共享系统资源，如果同时执行的线程过多，就有可能导致系统资源不足而产生阻塞的情况
->运用线程池能有效的控制线程最大并发数，避免以上的问题
-
-3. 对线程进行一些简单的管理
-> 比如：延时执行、定时循环执行的策略等
-> 运用线程池都能进行很好的实现
-
-
-
-线程池ThreadPoolExecutor
-在Java中，线程池的概念是Executor这个接口，具体实现为ThreadPoolExecutor类，学习Java中的线程池，就可以直接学习他了，
-对线程池的配置，就是对ThreadPoolExecutor构造函数的参数的配置，既然这些参数这么重要，就来看看构造函数的各个参数吧。
-
-
-
+在Java中，线程池的概念是Executor这个接口，具体实现为ThreadPoolExecutor类,
+对线程池的配置，就是对ThreadPoolExecutor构造函数的参数的配置。
 ThreadPoolExecutor提供了四个构造函数（新建一个线程池的时候，一般只用5个参数的构造函数）
+
 //五个参数的构造函数
 public ThreadPoolExecutor(int corePoolSize,
                           int maximumPoolSize,
@@ -111,77 +85,3 @@ ThreadFactory threadFactory
 
 RejectedExecutionHandler handler
 > 这玩意儿就是抛出异常专用的，比如上面提到的两个错误发生了，就会由这个handler抛出异常。
-
-
-
-通过ThreadPoolExecutor.execute(Runnable command)方法即可向线程池内添加一个任务
-ThreadPoolExecutor的策略：
-线程数量未达到corePoolSize，则新建一个线程(核心线程)执行任务；
-线程数量达到了corePools，则将任务移入队列等待；
-队列已满，新建线程(非核心线程)执行任务；
-队列已满，总线程数又达到了maximumPoolSize，就会由上面那位星期天(RejectedExecutionHandler)抛出异常。
-
-
-常见四种线程池
-
-1. CachedThreadPool()
-可缓存线程池：
-
-线程数无限制
-有空闲线程则复用空闲线程，若无空闲线程则新建线程
-一定程序减少频繁创建/销毁线程，减少系统开销
-创建方法：
-ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
-源码展示：
-public static ExecutorService newCachedThreadPool() {
-    return new ThreadPoolExecutor(0, Integer.MAX_VALUE,
-                                  60L, TimeUnit.SECONDS,
-                                  new SynchronousQueue<Runnable>());
-}
-
-2. FixedThreadPool()
-定长线程池：
-
-可控制线程最大并发数（同时执行的线程数）
-超出的线程会在队列中等待
-创建方法（2种）：
-ExecutorService fixedThreadPool = Executors.newFixedThreadPool(int nThreads);
-ExecutorService fixedThreadPool = Executors.newFixedThreadPool(int nThreads, ThreadFactory threadFactory);
-源码展示：
-public static ExecutorService newFixedThreadPool(int nThreads) {
-    return new ThreadPoolExecutor(nThreads, nThreads,
-                                  0L, TimeUnit.MILLISECONDS,
-                                  new LinkedBlockingQueue<Runnable>());
-}
-
-3. ScheduledThreadPool()
-定长线程池：
-
-支持定时及周期性任务执行。
-创建方法：
-ExecutorService scheduledThreadPool = Executors.newScheduledThreadPool(int corePoolSize);
-源码展示：
-public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
-    return new ScheduledThreadPoolExecutor(corePoolSize);
-}
-//ScheduledThreadPoolExecutor():
-public ScheduledThreadPoolExecutor(int corePoolSize) {
-    super(corePoolSize, Integer.MAX_VALUE,
-          DEFAULT_KEEPALIVE_MILLIS, MILLISECONDS,
-          new DelayedWorkQueue());
-}
-
-4. SingleThreadExecutor()
-单线程化的线程池：
-
-有且仅有一个工作线程执行任务
-所有任务按照指定顺序执行，即遵循队列的入队出队规则
-创建方法：
-ExecutorService singleThreadPool = Executors.newSingleThreadPool();
-源码展示：
-public static ExecutorService newSingleThreadExecutor() {
-    return new FinalizableDelegatedExecutorService
-        (new ThreadPoolExecutor(1, 1,
-                                0L, TimeUnit.MILLISECONDS,
-                                new LinkedBlockingQueue<Runnable>()));
-}
