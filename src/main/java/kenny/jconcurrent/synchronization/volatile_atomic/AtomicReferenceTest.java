@@ -1,4 +1,4 @@
-package kenny.jconcurrent.synchronization_volatile_atomic;
+package kenny.jconcurrent.synchronization.volatile_atomic;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;

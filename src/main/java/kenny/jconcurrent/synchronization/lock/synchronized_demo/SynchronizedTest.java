@@ -1,4 +1,4 @@
-package kenny.jconcurrent.synchronization_volatile_atomic;
+package kenny.jconcurrent.synchronization.lock.synchronized_demo;
 
 class SaleTask implements Runnable{
 

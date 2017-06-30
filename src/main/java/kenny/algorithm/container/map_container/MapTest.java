@@ -1,5 +1,7 @@
 package kenny.algorithm.container.map_container;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -26,11 +28,10 @@ public class MapTest {
             Map.Entry entry = (Map.Entry)iterator2.next();
             System.out.println("key:"+entry.getKey()+";  value:"+entry.getValue());
         }
-
+        //这种方法和上面的类似，只是写法上更简单
         for (Map.Entry<String,Integer> entry : map.entrySet()){
             System.out.println("key:"+entry.getKey()+";  value:"+entry.getValue());
         }
-
 
     }
 }
