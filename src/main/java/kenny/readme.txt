@@ -29,3 +29,10 @@ http://docs.oracle.com/javase/7/docs/api/
 特殊注释标记
  1） 待办（TODO）:（ 标记人，标记时间，[预计处理时间]）
  2） 错误（FIXME）:（标记人，标记时间，[预计处理时间]）
+
+
+
+ PS:
+ jconcurrent有线程池，
+ io有连接池（socket），
+ algorithm有内存池。

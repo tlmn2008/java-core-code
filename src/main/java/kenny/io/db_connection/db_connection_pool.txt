@@ -1,0 +1,32 @@
+
+String connUrl = "jdbc:mysql://your.database.domain/yourDBname";
+Class.forName("com.mysql.jdbc.Driver");
+Connection con = DriverManager.getConnection (connUrl);
+
+
+当我们创建了一个Connection对象，它在内部都执行了什么：
+1.“DriverManager”检查并注册驱动程序，
+2.“com.mysql.jdbc.Driver”就是我们注册了的驱动程序，它会在驱动程序类中调用“connect(url…)”方法。
+3.com.mysql.jdbc.Driver的connect方法根据我们请求的“connUrl”，创建一个“Socket连接”，连接到IP为“your.database.domain”，默认端口3306的数据库。
+4.创建的Socket连接将被用来查询我们指定的数据库，并最终让程序返回得到一个结果。
+
+
+如果创建Socket连接花费的时间比实际的执行查询的操作所花费的时间还要更长。
+可以考虑连接池初始化时创建一定数量的连接，然后从连接池中重用连接，而不是每次创建一个新的。
+数据库的连接池机制建议使用已经存在的三方库，如：像C3P0，DBCP等。
+
+
+1.C3P0：
+C3P0是一个开源的JDBC连接池，它实现了数据源和JNDI绑定，支持JDBC3规范和JDBC2的标准扩展。
+目前使用它的开源项目有Hibernate，Spring等。
+参考文档：
+http://tool.oschina.net/apidocs/apidoc?api=c3p0
+
+2.DBCP：
+DBCP（DataBase Connection Pool）数据库连接池，是java数据库连接池的一种，
+由Apache开发，通过数据库连接池，可以让程序自动管理数据库连接的释放和断开。
+
+
+
+
+
