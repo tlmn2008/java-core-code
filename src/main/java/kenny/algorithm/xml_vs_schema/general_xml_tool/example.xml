@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<avp name="Request">
+    <avp name="ID">0</avp>
+    <avp name="QoS">
+        <avp name="QCI">1</avp>
+        <avp name="MRB">1024</avp>
+        <avp name="GRB">1024</avp>
+        <avp name="ARP">
+            <avp name="PL">15</avp>
+            <avp name="PC">1</avp>
+            <avp name="PV">1</avp>
+        </avp>  
+    </avp>  
+    <avp name="SA">F101</avp>
+</avp>

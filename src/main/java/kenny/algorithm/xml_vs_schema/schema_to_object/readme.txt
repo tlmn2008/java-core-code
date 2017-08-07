@@ -1,0 +1,30 @@
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>jaxb2-maven-plugin</artifactId>
+            <version>1.3.1</version>
+            <executions>
+                <execution>
+                    <id>xjc</id>
+                    <goals>
+                        <goal>xjc</goal>
+                    </goals>
+                    <configuration>
+                        <packageName>com.xxx.xxx</packageName>
+                        <outputDirectory>src/main/java</outputDirectory>
+                        <bindingDirectory>src/main/resources/</bindingDirectory> //这里两行提供的文件有待研究
+                        <bindingFiles>bindings.xml</bindingFiles>
+                        <schemaDirectory>src/main/resources</schemaDirectory>
+                        <schemaFiles>
+                            xxx.xml,yyy.xml,zzz.xml
+                        </schemaFiles>
+                        <extension>true</extension>
+                        <clearOutputDir>false</clearOutputDir>
+                        <arguments>-no-header</arguments>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+    </plugins>
+</build>

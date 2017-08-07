@@ -6,8 +6,9 @@ class Helper {
 class Manager1 {
     private Helper helper = null;
     public Helper getHelper() {
-        if (helper == null)
+        if (helper == null) {
             helper = new Helper();
+        }
         return helper;
     }
 }
@@ -16,8 +17,9 @@ class Manager1 {
 class Manager2 {
     private Helper helper = null;
     public synchronized Helper getHelper() {
-        if (helper == null)
+        if (helper == null) {
             helper = new Helper();
+        }
         return helper;
     }
 }
@@ -26,11 +28,13 @@ class Manager2 {
 class Manager3 {
     private Helper helper = null;
     public Helper getHelper() {
-        if (helper == null)
-            synchronized(this) {
-                if (helper == null)
+        if (helper == null) {
+            synchronized (this) {
+                if (helper == null) {
                     helper = new Helper();
+                }
             }
+        }
         return helper;
     }
 }
@@ -44,8 +48,9 @@ class ManagerOk {
     public Helper getHelper() {
         if (helper == null) {
             synchronized(this) {
-                if (helper == null)
+                if (helper == null) {
                     helper = new Helper();
+                }
             }
         }
         return helper;

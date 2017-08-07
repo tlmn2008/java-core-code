@@ -1,4 +1,4 @@
-package kenny.jconcurrent.blockingqueue.demo;
+package kenny.jconcurrent.concurrent_container.blockingqueue.demo;
 
 import java.util.concurrent.ArrayBlockingQueue;
 

@@ -1,4 +1,4 @@
-package kenny.jvm.reflect_enum_value;
+package kenny.jvm.reflect.reflect_enum_value;
 
 import java.lang.reflect.Field;
 

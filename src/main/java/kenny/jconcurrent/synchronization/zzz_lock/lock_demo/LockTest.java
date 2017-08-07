@@ -1,4 +1,4 @@
-package kenny.jconcurrent.synchronization.lock.lock_demo;
+package kenny.jconcurrent.synchronization.zzz_lock.lock_demo;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
