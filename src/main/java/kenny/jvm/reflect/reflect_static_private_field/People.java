@@ -4,4 +4,5 @@ import sun.reflect.Reflection;
 
 public class People {
     private static String name;
+    private String age;
 }

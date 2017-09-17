@@ -1,4 +1,4 @@
-package kenny.algorithm.innerclass;
+package kenny.algorithm.innerclass.interfaceconstants;
 
 public interface Response {
 

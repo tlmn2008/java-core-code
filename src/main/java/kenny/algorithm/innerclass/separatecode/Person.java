@@ -1,4 +1,4 @@
-package kenny.algorithm.innerclass;
+package kenny.algorithm.innerclass.separatecode;
 
 public class Person {
 
